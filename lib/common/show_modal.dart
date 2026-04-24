@@ -2,18 +2,22 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:mytaskapp/constant/app_style.dart';
+import 'package:mytaskapp/provider/radio_provider.dart';
 import 'package:mytaskapp/widgets/date_time_widgets.dart';
 import 'package:mytaskapp/widgets/radio_widget.dart';
 import 'package:mytaskapp/widgets/textfield_widgets.dart';
-class AddNewTaskModal extends StatelessWidget {
+class AddNewTaskModal extends ConsumerWidget {
   const AddNewTaskModal({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    // ignore: unused_local_variable
+    final radioCategory = ref.watch(radioProvider);
     return Container(
       padding: EdgeInsets.all(30),
     height: MediaQuery.of(context).size.height * 0.70,
@@ -50,13 +54,13 @@ class AddNewTaskModal extends StatelessWidget {
           Row(
             children: [
               Expanded(child: 
-              RadioWidgets(radioTitle: 'learn', colorCategory: Colors.green)
+              RadioWidgets(radioTitle: 'learn', colorCategory: Colors.green, valueinput: 1, onChangevalue: ()=> ref.read(radioProvider.notifier).update((state) => 1 ) ,)
               ),
               Expanded(child: 
-              RadioWidgets(radioTitle: 'work', colorCategory: Colors.blueAccent.shade200)
+              RadioWidgets(radioTitle: 'work', colorCategory: Colors.blueAccent.shade200, valueinput: 2, onChangevalue: ()=>ref.read(radioProvider.notifier).update((state)=>2 ),)
               ),
               Expanded(child: 
-              RadioWidgets(radioTitle: 'general', colorCategory: Colors.cyan)
+              RadioWidgets(radioTitle: 'general', colorCategory: Colors.cyan, valueinput: 3, onChangevalue: ()=>ref.read(radioProvider.notifier).update((state)=>3 ),)
               ),
             ],
           ),
