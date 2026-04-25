@@ -34,9 +34,15 @@ Scalable Flutter architecture
 ☁️ Multi-device sync per user
 
 📸 **Screenshots**
-<img width="356" height="800" alt="Screenshot 2026-04-25 225025" src="https://github.com/user-attachments/assets/2f7bc7bb-761b-4170-b5a1-0d9b72b6fc75" />
-<img width="357" height="802" alt="Screenshot 2026-04-25 225204" src="https://github.com/user-attachments/assets/95720a2b-4a68-485d-9c7f-d9901a95e4f0" />
-<img width="360" height="804" alt="Screenshot 2026-04-25 225315" src="https://github.com/user-attachments/assets/1f03192b-b8aa-426a-b838-0bd67b78ddcf" />
-<img width="363" height="791" alt="Screenshot 2026-04-25 225352" src="https://github.com/user-attachments/assets/8bdd77d9-2afd-4dbd-ac39-e07a7ed34074" />
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/2f7bc7bb-761b-4170-b5a1-0d9b72b6fc75" width="250"/></td>
+    <td><img src="https://github.com/user-attachments/assets/95720a2b-4a68-485d-9c7f-d9901a95e4f0" width="250"/></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/1f03192b-b8aa-426a-b838-0bd67b78ddcf" width="250"/></td>
+    <td><img src="https://github.com/user-attachments/assets/8bdd77d9-2afd-4dbd-ac39-e07a7ed34074" width="250"/></td>
+  </tr>
+</table>
 
 
