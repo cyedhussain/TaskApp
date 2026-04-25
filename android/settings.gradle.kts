@@ -18,12 +18,15 @@ pluginManagement {
 }
 
 plugins {
-    id("dev.flutter.flutter-plugin-loader") version "1.0.0"
-    id("com.android.application") version "8.11.1" apply false
-    // START: FlutterFire Configuration
-    id("com.google.gms.google-services") version("4.3.15") apply false
-    // END: FlutterFire Configuration
-    id("org.jetbrains.kotlin.android") version "2.2.20" apply false
+    id "dev.flutter.flutter-plugin-loader" version "1.0.0"
+    
+    // Updated to 8.6.0 as requested by the warning
+    id "com.android.application" version "8.6.0" apply false
+    
+    // Keep this at 4.4.2 for modern Gradle compatibility
+    id "com.google.gms.google-services" version "4.4.2" apply false
+    
+    // Updated to 2.1.0 as requested by the warning
+    id "org.jetbrains.kotlin.android" version "2.1.0" apply false
 }
-
 include(":app")

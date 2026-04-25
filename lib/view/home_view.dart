@@ -1,14 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:mytaskapp/common/show_modal.dart';
+import 'package:mytaskapp/provider/service_provider.dart';
 import 'package:mytaskapp/widgets/card_todo_widgets.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context , WidgetRef ref) {
+    final todoData = ref.watch(fetchStreamProvider);
+    final todos = todoData.value ?? [];
+
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
@@ -76,9 +81,9 @@ class HomePage extends StatelessWidget {
          ///  ----------------------------[card and lists sections] ---------------------------
          Gap(20),
          ListView.builder(
-          itemCount: 1,
+          itemCount: todos.length,
           shrinkWrap: true,
-          itemBuilder:(context ,index) => CardToDoWidgets() )
+          itemBuilder:(context ,index) => CardToDoWidgets(getIndex: index,) )
 
             ],
           ),

@@ -1,14 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+// import 'package:gap/gap.dart';
+import 'package:mytaskapp/provider/service_provider.dart';
 
-class CardToDoWidgets extends StatelessWidget {
+class CardToDoWidgets extends ConsumerWidget {
   const CardToDoWidgets({
-    super.key,
+    super.key, required this.getIndex,
   });
-
+  final int getIndex;
+  
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context , WidgetRef ref) {
+    final todoData = ref.watch(fetchStreamProvider);
+    return todoData.when(data: (todoData) =>Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
      width: double.infinity,
      height: 120,
      decoration: BoxDecoration(
@@ -31,16 +39,29 @@ class CardToDoWidgets extends StatelessWidget {
              mainAxisAlignment: MainAxisAlignment.center,
              children: [
                ListTile(
+                leading: IconButton(onPressed: () => ref.read(serviceProvider).deleteTask(todoData[getIndex].docId!), icon: Icon(CupertinoIcons.trash)),
                  contentPadding: EdgeInsets.zero,
-                 title: Text('learning flutter development',),
-                 subtitle: Text('learn state management and backend'),
+                 title: Text(todoData[getIndex].titleTask ,style: TextStyle(
+                  decoration: todoData[getIndex].isDone ? TextDecoration.lineThrough : null
+                 ),
+                 ),
+                 subtitle: Text(todoData[getIndex].description,style: TextStyle(
+                  decoration: todoData[getIndex].isDone ? TextDecoration.lineThrough : null
+                 ), ),
                  trailing: Transform.scale(
                    scale: 1.5,
                    
                    child: Checkbox(
                      activeColor: Colors.blue.shade800,
                      shape: CircleBorder(),
-                     value: true, onChanged: (value) {} )),
+                     value: todoData[getIndex].isDone, onChanged: (value) async {
+                      await FirebaseFirestore.instance
+                        .collection('todoApp')
+                        .doc(todoData[getIndex].docId)
+                         .update({
+                       'isDone': value ?? false,
+                      });
+                     } )),
                ),
              Transform.translate(
                offset: Offset(0, -12),
@@ -55,9 +76,9 @@ class CardToDoWidgets extends StatelessWidget {
                
                  Row(
                    children: [
-                     Text('Today'),
+                     Text('today'),
                      Gap(12),
-                     Text('9:12 AM')
+                     Text(todoData[getIndex].timeTask)
                    ],
                  )
                    ],
@@ -69,7 +90,9 @@ class CardToDoWidgets extends StatelessWidget {
          ))
        ],
      ),
-    );
+    ),
+     error:(error ,stackTrace) =>Center(child: Text('error'),) ,
+    loading: ()=> Center(child: CircularProgressIndicator(),));
   }
 }
 

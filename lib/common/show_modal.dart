@@ -6,16 +6,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:mytaskapp/constant/app_style.dart';
+import 'package:mytaskapp/modal/todo_modal.dart';
 import 'package:mytaskapp/provider/date_time_provider.dart';
 import 'package:mytaskapp/provider/radio_provider.dart';
+import 'package:mytaskapp/provider/service_provider.dart';
 import 'package:mytaskapp/widgets/date_time_widgets.dart';
 import 'package:mytaskapp/widgets/radio_widget.dart';
 import 'package:mytaskapp/widgets/textfield_widgets.dart';
 class AddNewTaskModal extends ConsumerWidget {
-  const AddNewTaskModal({
+   AddNewTaskModal({
     super.key,
   });
-
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     // ignore: unused_local_variable
@@ -48,11 +51,11 @@ class AddNewTaskModal extends ConsumerWidget {
 
           Text('Title Task',style:AppStyle.headingOne),
           const Gap(6),
-          TextFieldWidgets(hintText: 'Add New Task', maxLine:1,),
+          TextFieldWidgets(hintText: 'Add New Task', maxLine:1, txtController: titleController),
           const Gap(12),
           Text('Description',style: AppStyle.headingOne,),
           const Gap(6),
-          TextFieldWidgets(hintText: 'Add Description', maxLine: 3),
+          TextFieldWidgets(hintText: 'Add Description', maxLine: 3, txtController: descriptionController,),
           const Gap(12),
           Text('Category',style: AppStyle.headingOne,),
           const Gap(6),
@@ -119,7 +122,39 @@ class AddNewTaskModal extends ConsumerWidget {
               ),
               Gap(12),
               /// ------------------------[create button]--------------------------
-              Expanded(child: ElevatedButton(onPressed: (){},style: ElevatedButton.styleFrom(
+              Expanded(child: ElevatedButton(onPressed: (){
+
+                  final getRadioValues =ref.read(radioProvider);
+                  String category=' ';
+                  switch (getRadioValues) {
+                    case 1:
+                      category ='Learning';
+                      break;
+                    case 2:
+                      category ='Working';
+                      break;
+                    case 3:
+                      category ='General';
+                      break;    
+                    default:
+                  }
+
+                ref.read(serviceProvider).addTodoTask(
+                  TodoModal(titleTask: titleController.text,
+                   description: descriptionController.text, 
+                   category: category, 
+                   dateTask: ref.read(dateProvider),
+                    timeTask: ref.read(timeProvider),
+                    isDone: false,
+                    )
+                );  
+
+                titleController.clear();
+                descriptionController.clear();
+                ref.read(radioProvider.notifier).update((state)=>0 );
+                Navigator.pop(context);
+
+              },style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueAccent.shade100,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),

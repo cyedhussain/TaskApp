@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -65,4 +56,34 @@ class DefaultFirebaseOptions {
     storageBucket: 'mynotesapp-c94ef.firebasestorage.app',
     iosBundleId: 'com.example.mytaskapp',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyB1okgyFDgjlS2vjiLhhrU3J38i7-tiaLQ',
+    appId: '1:791348480907:web:c3b47ac021c8a261d6bd8e',
+    messagingSenderId: '791348480907',
+    projectId: 'mynotesapp-c94ef',
+    authDomain: 'mynotesapp-c94ef.firebaseapp.com',
+    storageBucket: 'mynotesapp-c94ef.firebasestorage.app',
+    measurementId: 'G-WQ42DQWPSV',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBPse_qkmLlC8Ljs7NK_TQhK14arZpKQOE',
+    appId: '1:791348480907:ios:ecacfe920638f074d6bd8e',
+    messagingSenderId: '791348480907',
+    projectId: 'mynotesapp-c94ef',
+    storageBucket: 'mynotesapp-c94ef.firebasestorage.app',
+    iosBundleId: 'com.example.mytaskapp',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyB1okgyFDgjlS2vjiLhhrU3J38i7-tiaLQ',
+    appId: '1:791348480907:web:21f2171984b6a7e2d6bd8e',
+    messagingSenderId: '791348480907',
+    projectId: 'mynotesapp-c94ef',
+    authDomain: 'mynotesapp-c94ef.firebaseapp.com',
+    storageBucket: 'mynotesapp-c94ef.firebasestorage.app',
+    measurementId: 'G-T98DQTRR0T',
+  );
+
 }
