@@ -1,37 +1,52 @@
-📝 **Task Todo App**
-A simple, modern, and efficient Task Management App built with Flutter. This app helps users organize their daily tasks,and stay productive with a clean and intuitive UI.
+# 📝 Task Todo App
 
-🚀 **Features**
-➕ Add new tasks easily
-🗑️ Delete completed or unwanted tasks
-✅ Mark tasks as completed / not completed
-☁️ Real-time data sync with Firebase Firestore
-🔄 Live updates using Riverpod State Management
-📱 Responsive and smooth UI
-🧠 Clean architecture for scalability
+A simple, modern, and efficient **Task Management App** built with Flutter.  
+This app helps users organize their daily tasks and stay productive with a clean and intuitive UI.
 
-🛠️ **Tech Stack**
-Flutter (UI Framework)
-Dart (Programming Language)
-Firebase Firestore (Backend Database)
-Riverpod (State Management)
+---
 
-📌 **Project Highlights**
+## 🚀 Features
+
+- ➕ Add new tasks easily  
+- 🗑️ Delete completed or unwanted tasks  
+- ✅ Mark tasks as completed / not completed  
+- ☁️ Real-time data sync with Firebase Firestore  
+- 🔄 Live updates using Riverpod State Management  
+- 📱 Responsive and smooth UI  
+- 🧠 Clean architecture for scalability  
+
+---
+
+## 🛠️ Tech Stack
+
+- **Flutter** – UI Framework  
+- **Dart** – Programming Language  
+- **Firebase Firestore** – Backend Database  
+- **Riverpod** – State Management  
+
+---
+
+## 📌 Project Highlights
 
 This project demonstrates practical implementation of:
 
-CRUD operations with Firebase
-Reactive state management
-Clean UI/UX design principles
-Real-time data synchronization
-Scalable Flutter architecture
+- CRUD operations with Firebase  
+- Reactive state management  
+- Clean UI/UX design principles  
+- Real-time data synchronization  
+- Scalable Flutter architecture  
 
-🚀 **Future Enhancements**
-🔐 User authentication system
-📅 Task deadlines & reminders
-📊 Progress tracking dashboard
-🌙 Dark mode support
-☁️ Multi-device sync per user
+---
+
+## 🚀 Future Enhancements
+
+- 🔐 User authentication system  
+- 📅 Task deadlines & reminders  
+- 📊 Progress tracking dashboard  
+- 🌙 Dark mode support  
+- ☁️ Multi-device sync per user  
+
+---
 
 📸 **Screenshots**
 <table>
