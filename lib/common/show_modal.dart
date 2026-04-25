@@ -22,12 +22,13 @@ class AddNewTaskModal extends ConsumerWidget {
     final radioCategory = ref.watch(radioProvider);
     // ignore: unused_local_variable
     final dateprov =ref.watch(dateProvider);
+    final timeprov =ref.watch(timeProvider);
     return Container(
       padding: EdgeInsets.all(30),
     height: MediaQuery.of(context).size.height * 0.70,
     decoration: BoxDecoration(
     color: Colors.white,
-    borderRadius: BorderRadius.circular(18)
+    borderRadius:BorderRadius.only(topLeft: Radius.circular(12),topRight: Radius.circular(12)) 
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,16 +89,23 @@ class AddNewTaskModal extends ConsumerWidget {
               }
                ),
               Gap(22),
-              DateAndTimeWidget(titleText:'Time', valueText: ' hh:mm', iconsection: CupertinoIcons.clock, onTap: ()=>showTimePicker(context: context, initialTime: TimeOfDay.now()),),
+              DateAndTimeWidget(titleText:'Time', valueText: timeprov, iconsection: CupertinoIcons.clock, onTap: () async {
+                final getTimeValue = await showTimePicker(context: context, initialTime: TimeOfDay.now());
+                if (getTimeValue !=null) {
+                  ref.read(timeProvider.notifier).update((state) => getTimeValue.format(context));
+                }
+              },),
               
             ],
           ),
           Gap(12),
           // button section 
+
+          ///--------------[cancel button] ------------------------
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: ElevatedButton(onPressed: (){},style: ElevatedButton.styleFrom(
+              Expanded(child: ElevatedButton(onPressed: () => Navigator.pop(context),style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -110,6 +118,7 @@ class AddNewTaskModal extends ConsumerWidget {
               )
               ),
               Gap(12),
+              /// ------------------------[create button]--------------------------
               Expanded(child: ElevatedButton(onPressed: (){},style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueAccent.shade100,
                 shape: RoundedRectangleBorder(
