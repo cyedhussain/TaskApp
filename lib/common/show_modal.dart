@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:mytaskapp/constant/app_style.dart';
+import 'package:mytaskapp/provider/date_time_provider.dart';
 import 'package:mytaskapp/provider/radio_provider.dart';
 import 'package:mytaskapp/widgets/date_time_widgets.dart';
 import 'package:mytaskapp/widgets/radio_widget.dart';
@@ -18,6 +20,8 @@ class AddNewTaskModal extends ConsumerWidget {
   Widget build(BuildContext context,WidgetRef ref) {
     // ignore: unused_local_variable
     final radioCategory = ref.watch(radioProvider);
+    // ignore: unused_local_variable
+    final dateprov =ref.watch(dateProvider);
     return Container(
       padding: EdgeInsets.all(30),
     height: MediaQuery.of(context).size.height * 0.70,
@@ -71,9 +75,20 @@ class AddNewTaskModal extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // ignore: avoid_unnecessary_containers
-              DateAndTimeWidget(titleText: 'Date', valueText: ' dd/mm/yy', iconsection: CupertinoIcons.calendar,),
+              DateAndTimeWidget(titleText:'Date', valueText: dateprov, iconsection: CupertinoIcons.calendar, onTap: () async {
+                // ignore: unused_local_variable
+                final getValue =await showDatePicker(context: context,initialDate: DateTime.now(), firstDate: DateTime(2021), lastDate: DateTime(2027));
+                if (getValue !=null) {
+                  final format =DateFormat.yMd();
+                  // print(format.toString());
+                  ref.read(dateProvider.notifier).update((state)=> format.format(getValue));
+                }
+
+                
+              }
+               ),
               Gap(22),
-              DateAndTimeWidget(titleText: 'Time', valueText: ' hh:mm', iconsection: CupertinoIcons.clock,),
+              DateAndTimeWidget(titleText:'Time', valueText: ' hh:mm', iconsection: CupertinoIcons.clock, onTap: ()=>showTimePicker(context: context, initialTime: TimeOfDay.now()),),
               
             ],
           ),
